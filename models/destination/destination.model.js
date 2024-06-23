@@ -12,7 +12,7 @@ exports.create = async (data, email, result) => {
                         if (err) {
                             console.error(err)
                         } else {
-                            db.run('INSERT INTO destinations (url, http_method, headers, account_id) VALUES (?, ?, ?, ?)', [data.url, data.http_method, data.headers, id.id], (err) => {
+                            db.run('INSERT INTO destinations (url, http_method, headers, account_id) VALUES (?, ?, ?, ?)', [data.url, data.http_method, JSON.stringify(data.headers), id.id], (err) => {
                                 if (err) {
                                     console.error(err, "error from the insert destination")
                                 } else {
@@ -30,23 +30,20 @@ exports.create = async (data, email, result) => {
     }
 }
 
-exports.list = async (id, email, result) => {
+exports.list = async (id, result) => {
     try {
-        await AccountModel.getAccountId(email, (err, rows) => {
-            if (err) {
-                console.error(err)
+        const sql = id ? `SELECT url, http_method, headers FROM destinations WHERE id = ${id}` : `SELECT id,url, http_method, headers FROM destinations`;
+        db.all(sql, (err2, rows2) => {
+            if (err2) {
+                result("Error while fetching the account list", null)
             } else {
-                const sql = id ? `SELECT url, http_method, headers FROM destinations WHERE id = ${id}` : `SELECT id,url, http_method, headers FROM destinations WHERE account_id = ${rows.id}`;
-                db.all(sql, (err2, rows2) => {
-                    if (err2) {
-                        result("Error while fetching the account list", null)
-                    } else {
-                        result(null, id ? rows2[0] : rows2)
-                    }
+                rows2.map((d) => {
+                    d.headers = JSON.parse(d.headers);
+                    return d
                 })
+                result(null, id ? rows2[0] : rows2)
             }
         })
-
     } catch (error) {
         console.log(error, "Error from the list destination model")
     }
@@ -80,5 +77,21 @@ exports.delete = async (id, result) => {
         })
     } catch (error) {
         console.error(error)
+    }
+}
+
+exports.accountDestinations = async (id, result) => {
+    try {
+        const sql = `SELECT url, http_method, headers FROM destinations WHERE account_id = ${id}`;
+        db.all(sql, (err2, rows2) => {
+            if (err2) {
+                result("Error while fetching the account list", null)
+            } else {
+                rows2.map((d) => { d.headers = JSON.parse(d.headers); return d })
+                result(null, rows2)
+            }
+        })
+    } catch (error) {
+        console.log(error, "Error from the list destination model")
     }
 }

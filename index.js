@@ -5,6 +5,7 @@ const PORT = process.env.PORT ? process.env.PORT : 8080
 const IndexRoutes = require("./routes/index")
 const bodyParser = require("body-parser")
 const cors = require("cors")
+const router = require("express").Router()
 
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -20,6 +21,11 @@ app.use(
 );
 
 app.use("/", IndexRoutes)
+
+
+app.get("/getlist", (req, res) => {
+    res.send({ status: 200, result: [{ name: "ganesh" }, { name: "kumar" }, { name: "priya" }, { name: "dharshini" }, { name: "sharan" }, { name: "vishal" }] })
+})
 
 app.listen(PORT, () => {
     console.log(`Server started and running on the port : ${PORT}`)

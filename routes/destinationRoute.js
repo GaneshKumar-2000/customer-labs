@@ -94,4 +94,18 @@ router.delete("/delete/:id",
     }
 )
 
+router.get("/accountDestinations/:id",
+    middleware.authenticate(),
+    (req, res) => {
+        Destination.accountDestinations(req, (msg, code, data) => {
+            if (code === 400) {
+                res.json({ status: code, message: msg, result: data })
+            } else {
+                res.json({ status: code, message: msg, result: data })
+            }
+        })
+    }
+)
+
 module.exports = router
+

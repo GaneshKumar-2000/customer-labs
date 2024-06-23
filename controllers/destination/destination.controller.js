@@ -19,8 +19,7 @@ exports.create = async (req, callBack) => {
 //List destinations or destination
 exports.list = async (req, callBack) => {
     try {
-        const email = req.logged_email
-        await DestinationModel.list(req.params.id, email, (err, rows) => {
+        await DestinationModel.list(req.params.id, (err, rows) => {
             if (err) {
                 callBack(err, 400, err)
             } else {
@@ -59,5 +58,20 @@ exports.delete = async (req, callBack) => {
         })
     } catch (error) {
         console.error("Error from the delete destination controller", error)
+    }
+}
+
+//List all the destinations according to the account id
+exports.accountDestinations = async (req, callBack) => {
+    try {
+        await DestinationModel.accountDestinations(req.params.id, (err, rows) => {
+            if (err) {
+                callBack(err, 400, err)
+            } else {
+                callBack("Successfully fetched", 200, rows)
+            }
+        })
+    } catch (error) {
+        console.error("Error from the list destination controller", error)
     }
 }
