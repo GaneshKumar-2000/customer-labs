@@ -9,7 +9,7 @@ exports.create = async (data, result) => {
                 if (err) {
                     console.error(err)
                 } else {
-                    const token = await middleware.generateToken({ email: data.email })
+                    const token = await middleware.generateToken({ email: data.email_id })
                     db.run('INSERT INTO accounts (account_name, email, app_secret_token) VALUES (?, ?, ?)', [data.account_name, data.email_id, token], (err) => {
                         if (err) {
                             console.error(err)
@@ -60,4 +60,38 @@ exports.update = async (data, id, result) => {
     } catch (error) {
         console.error(error, "Error from the update account model")
     }
+}
+
+exports.delete = async (id, result) => {
+    try {
+        const accounts_sql = `DELETE FROM accounts WHERE account_id = ?`;
+        const destination_sql = `DELETE FROM destinations WHERE account_id = ?`
+        db.run(accounts_sql, [id], (err) => {
+            if (err) {
+                console.error(err, "error from the delete account model")
+                result(err, null)
+            } else {
+                db.run(destination_sql, [id], (err) => {
+                    if (err) {
+                        result(err, null)
+                    } else {
+                        result(null, true)
+                    }
+                })
+            }
+        })
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+exports.getAccountId = async (email, result) => {
+    const sql = `SELECT account_id FROM accounts WHERE email = ?`;
+    db.all(sql, [email], (err, rows) => {
+        if (err) {
+            result({ error: true, error_msg: err }, null)
+        } else {
+            result(null, { error: false, id: rows[0].account_id })
+        }
+    })
 }

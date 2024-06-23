@@ -1,12 +1,14 @@
 const router = require("express").Router();
 const { check, validationResult } = require("express-validator");
-const Account = require("../controllers/account/account.controller");
+const Destination = require("../controllers/destination/destination.controller");
 const middleware = require("../middleware/utils")
 
 router.post("/create",
+    middleware.authenticate(),
     [
-        check("email_id").notEmpty().withMessage("Email id is required"),
-        check("account_name").notEmpty().withMessage("Account name is required")
+        check("url").notEmpty().withMessage("url is required"),
+        check("http_method").notEmpty().withMessage("HTTP method name is required"),
+        check("headers").notEmpty().withMessage("headers is required")
     ], (req, res) => {
         const error = validationResult(req).array()
         if (error.length) {
@@ -16,7 +18,7 @@ router.post("/create",
             })
             res.status(400).json({ status: 400, message: "Values are required", result: listMsg })
         } else {
-            Account.create(req, (msg, code) => {
+            Destination.create(req, (msg, code) => {
                 if (code === 400) {
                     res.json({ status: code, message: msg })
                 } else {
@@ -30,7 +32,7 @@ router.post("/create",
 router.get("/list",
     middleware.authenticate(),
     (req, res) => {
-        Account.list(req, (msg, code, data) => {
+        Destination.list(req, (msg, code, data) => {
             if (code === 400) {
                 res.json({ status: code, message: msg, result: data })
             } else {
@@ -43,7 +45,7 @@ router.get("/list",
 router.get("/list/:id",
     middleware.authenticate(),
     (req, res) => {
-        Account.list(req, (msg, code, data) => {
+        Destination.list(req, (msg, code, data) => {
             if (code === 400) {
                 res.json({ status: code, message: msg, result: data })
             } else {
@@ -56,7 +58,9 @@ router.get("/list/:id",
 router.put("/update/:id",
     middleware.authenticate(),
     [
-        check("account_name").notEmpty().withMessage("Account name is required")
+        check("url").notEmpty().withMessage("url is required"),
+        check("http_method").notEmpty().withMessage("HTTP method name is required"),
+        check("headers").notEmpty().withMessage("headers is required")
     ], (req, res) => {
         const error = validationResult(req).array()
         if (error.length) {
@@ -66,7 +70,7 @@ router.put("/update/:id",
             })
             res.status(400).json({ status: 400, message: "Values are required", result: listMsg })
         } else {
-            Account.update(req, (msg, code) => {
+            Destination.update(req, (msg, code) => {
                 if (code === 400) {
                     res.json({ status: code, message: msg })
                 } else {
@@ -80,7 +84,7 @@ router.put("/update/:id",
 router.delete("/delete/:id",
     middleware.authenticate(),
     (req, res) => {
-        Account.delete(req, (msg, code) => {
+        Destination.delete(req, (msg, code) => {
             if (code === 400) {
                 res.json({ status: code, message: msg })
             } else {
@@ -90,4 +94,4 @@ router.delete("/delete/:id",
     }
 )
 
-module.exports = router;
+module.exports = router

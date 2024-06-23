@@ -1,24 +1,26 @@
-const AccountModel = require("../../models/account/account.model");
+const DestinationModel = require("../../models/destination/destination.model")
 
-//Create account
+//Create destination
 exports.create = async (req, callBack) => {
     try {
-        await AccountModel.create(req.body, (err, rows) => {
+        const email = req.logged_email
+        await DestinationModel.create(req.body, email, (err, rows) => {
             if (err) {
                 callBack(err, 400)
             } else {
-                callBack("Successfully Created", 200, rows)
+                callBack("Successfully Created", 200)
             }
         })
     } catch (error) {
-        console.error("Error from the create account controller", error)
+        console.error("Error from the create destination controller", error)
     }
 }
 
-//List accounts or account
+//List destinations or destination
 exports.list = async (req, callBack) => {
     try {
-        await AccountModel.list(req.params.id, (err, rows) => {
+        const email = req.logged_email
+        await DestinationModel.list(req.params.id, email, (err, rows) => {
             if (err) {
                 callBack(err, 400, err)
             } else {
@@ -26,14 +28,14 @@ exports.list = async (req, callBack) => {
             }
         })
     } catch (error) {
-        console.error("Error from the list account controller", error)
+        console.error("Error from the list destination controller", error)
     }
 }
 
 //Update Account
 exports.update = async (req, callBack) => {
     try {
-        await AccountModel.update(req.body, req.params.id, (err, rows) => {
+        await DestinationModel.update(req.body, req.params.id, (err, rows) => {
             if (err) {
                 callBack(err, 400)
             } else {
@@ -41,14 +43,14 @@ exports.update = async (req, callBack) => {
             }
         })
     } catch (error) {
-        console.error("Error from the update account controller", error)
+        console.error("Error from the update destination controller", error)
     }
 }
 
 //Delete Account
 exports.delete = async (req, callBack) => {
     try {
-        await AccountModel.delete(req.params.id, (err, rows) => {
+        await DestinationModel.delete(req.params.id, (err, rows) => {
             if (err) {
                 callBack(err, 400)
             } else {
@@ -56,6 +58,6 @@ exports.delete = async (req, callBack) => {
             }
         })
     } catch (error) {
-        console.error("Error from the delete account controller", error)
+        console.error("Error from the delete destination controller", error)
     }
 }
