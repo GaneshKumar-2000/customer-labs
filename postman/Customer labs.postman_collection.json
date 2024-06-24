@@ -1,0 +1,369 @@
+{
+	"info": {
+		"_postman_id": "60d0f8be-d8b6-4bd1-807d-2e13b6a1a0c9",
+		"name": "Customer labs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22869859",
+		"_collection_link": "https://solar-sunset-619430.postman.co/workspace/THAP-V2~0eb38cca-ac1c-471d-a8de-dd1f35f025b7/collection/22869859-60d0f8be-d8b6-4bd1-807d-2e13b6a1a0c9?action=share&source=collection_link&creator=22869859"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email_id\": \"gandeshkumar1@gmail.com\",\r\n    \"account_name\": \"ganeshkumar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/account/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"account",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "CL-X-TOKEN",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiZ2FuZXNzaGt1bWExckBnbWFpbC5jb20ifSwiaWF0IjoxNzE5MTIyNjUyfQ.z4FKgBCiALutqQUDaMaMUw9eBo6WaJa1RcSKkZFIZh4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/account/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"account",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/account/list/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"account",
+								"list",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"account_name\": \"ganesh\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/account/update/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"account",
+								"update",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "CL-X-TOKEN",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiZ2FuZXNoa3VtYXIxQGdtYWlsLmNvbSJ9LCJpYXQiOjE3MTkxMzAyMzR9.WUdnES8TmN_x6q7scz28c5LadkH02H7vIabUir4ah5g",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/account/delete/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"account",
+								"delete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Destination",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "cl-x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiZ2FuZGVzaGt1bWFyMUBnbWFpbC5jb20ifSwiaWF0IjoxNzE5MTQxNDg4fQ.VllCJSysWWcxY3BM4tuhksIQKJk0f_b006qv17msYiM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"url\": \"http://localhost:5000/getlist\",\r\n    \"http_method\": \"get\",\r\n    \"headers\": {\r\n        \"APP_ID\": \"1234APPID1234\",\r\n        \"APP_SECTET\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiZ2FuZGVzaGt1bWFyMUBnbWFpbC5jb20ifSwiaWF0IjoxNzE5MTQxNDg4fQ.VllCJSysWWcxY3BM4tuhksIQKJk0f_b006qv17msYiM\",\r\n        \"ACTION\": \"user.update\",\r\n        \"Content-Type\": \"application/json\",\r\n        \"Accept\": \"*\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/destination/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"destination",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "cl-x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiZ2FuZGVzaGt1bWFyMUBnbWFpbC5jb20ifSwiaWF0IjoxNzE5MTQxNDg4fQ.VllCJSysWWcxY3BM4tuhksIQKJk0f_b006qv17msYiM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/destination/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"destination",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "cl-x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiZ2FuZXNoa3VtYXIxQGdtYWlsLmNvbSJ9LCJpYXQiOjE3MTkxMzAyMzR9.WUdnES8TmN_x6q7scz28c5LadkH02H7vIabUir4ah5g",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/destination/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"destination",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "cl-x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiZ2FuZGVzaGt1bWFyMUBnbWFpbC5jb20ifSwiaWF0IjoxNzE5MTMwMzA2fQ.EJLhKKwFueY6cFn3VXBtUyl8_RTCLV7z3KRuEHT8nfM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"url\": \"google.com\",\r\n    \"http_method\": \"POST\",\r\n    \"headers\": \"{'APP_ID': '1234APPID1234', 'APP_SECRET': 'enwdj3bshwer43bjhjs9ereuinkjcnsiurew8s', 'ACTION': 'user.update', 'Content-Type': 'application/json', 'Accept': '*'}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/destination/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"destination",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "cl-x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiZ2FuZGVzaGt1bWFyMUBnbWFpbC5jb20ifSwiaWF0IjoxNzE5MTMwMzA2fQ.EJLhKKwFueY6cFn3VXBtUyl8_RTCLV7z3KRuEHT8nfM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/destination/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"destination",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Destinations by account id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "cl-x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiZ2FuZGVzaGt1bWFyMUBnbWFpbC5jb20ifSwiaWF0IjoxNzE5MTQxNDg4fQ.VllCJSysWWcxY3BM4tuhksIQKJk0f_b006qv17msYiM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/destination/accountDestinations/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"destination",
+						"accountDestinations",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send data to destinations",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cl-x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiZ2FuZGVzaGt1bWFyMUBnbWFpbC5jb20ifSwiaWF0IjoxNzE5MTQxNDg4fQ.VllCJSysWWcxY3BM4tuhksIQKJk0f_b006qv17msYiM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": \"some data\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/server/incoming_data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"server",
+						"incoming_data"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
